@@ -1,0 +1,94 @@
+{
+	"info": {
+		"_postman_id": "e6c67e7d-dd5d-4faa-a133-fae8da4f7faf",
+		"name": "New Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24412293",
+		"_collection_link": "https://www.postman.com/descent-module-astronaut-18591434/workspace/karthikeyan/collection/24412293-e6c67e7d-dd5d-4faa-a133-fae8da4f7faf?action=share&source=collection_link&creator=24412293"
+	},
+	"item": [
+		{
+			"name": "New Request",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const XLSX = require('xlsx');",
+							"const fs = require('fs');",
+							"",
+							"function readExcelData(filePath) {",
+							"    // Read the Excel file",
+							"    const workbook = XLSX.readFile(\"/Users/kj001/Downloads/testdata.xlsx\");",
+							"    // Get the first sheet",
+							"    const sheet = workbook.Sheets[workbook.SheetNames[0]];",
+							"    // Convert sheet data to JSON format",
+							"    const jsonData = XLSX.utils.sheet_to_json(sheet);",
+							"    return jsonData;",
+							"}",
+							"",
+							"const testData = readExcelData(\"testdata.xlsx\");",
+							"",
+							"testData.forEach((data, index) => {",
+							"    pm.variables.set(\"name_\" + index, data.name);",
+							"    pm.variables.set(\"salary_\" + index, data.salary);",
+							"    pm.variables.set(\"age_\" + index, data.age);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"",
+							"pm.test(\"Response status is 200 OK\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Verify response data\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.status).to.equal(\"success\");",
+							"    pm.expect(jsonData.data.name).to.equal(pm.variables.get(\"name\"));",
+							"    pm.expect(jsonData.data.salary).to.equal(pm.variables.get(\"salary\"));",
+							"    pm.expect(jsonData.data.age).to.equal(pm.variables.get(\"age\"));",
+							"    pm.expect(jsonData.data.id).to.be.a(\"number\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"{{name}}\",\n    \"salary\": \"{{salary}}\",\n    \"age\": \"{{age}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://dummy.restapiexample.com/api/v1/create",
+					"protocol": "https",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"create"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
