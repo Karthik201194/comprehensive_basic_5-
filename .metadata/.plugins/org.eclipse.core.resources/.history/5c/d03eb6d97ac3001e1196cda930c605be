@@ -1,0 +1,19 @@
+package Modules;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
+public class FirstPage {
+	public static WebDriver driver;
+	
+@FindBy(id="user-name")
+private WebElement userName;
+
+@FindBy (id="password")
+private WebElement password;
+
+@FindBy(id="login-button")
+private WebElement loginButton;
+
+}

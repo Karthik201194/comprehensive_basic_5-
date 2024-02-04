@@ -1,0 +1,8 @@
+package Modules;
+
+import org.openqa.selenium.support.FindBy;
+
+public class FirstPage {
+@FindBy(id="user-name")
+private WebElement userName;
+}

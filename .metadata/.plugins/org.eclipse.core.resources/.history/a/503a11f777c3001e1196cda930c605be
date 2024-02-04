@@ -1,0 +1,34 @@
+package Utility;
+
+import org.openqa.selenium.WebDriver;
+
+public class BaseClass {
+	public static WebDriver driver;
+
+	public static  WebDriver browser_launch(WebDriver driver) {
+		
+	}
+	
+	
+
+	public static void url(WebDriver driver , String URL) {
+		driver.get(URL);	
+	}
+
+	public static void maximize(WebDriver d) {
+		d.manage().window().maximize();
+	}
+	public static void send_keys(WebElement element , String values) {
+		element.sendKeys(values);	
+	}
+
+	public static void click(WebElement element) {
+		element.click();
+
+	}
+	public static void clear(WebElement element) {
+		element.clear();
+
+	}
+
+}

@@ -1,0 +1,18 @@
+package com.capstone.IIHT;
+import org.junit.runner.RunWith;
+import io.cucumber.junit.CucumberOptions;
+import io.cucumber.junit.*;
+
+public class RunnerClass {
+	@RunWith(Cucumber.class) 
+	@CucumberOptions(features="/Users/kj001/eclipse-workspace/capjava/src/test/resources/Features",
+	glue={"StepDefinition"},
+	monochrome = true,
+	plugin = { "pretty", "html:target/reports"})
+
+	public static void main(String[] args) {
+		
+
+	}
+
+}
